@@ -9,5 +9,10 @@ services:
       - ./todo-web:/usr/local/apache2/htdocs/:ro
 
   todo-api:
+    build:
+      dockerfile: Dockerfile-Dev
     ports:
       - '8082:3000'
+    volumes:
+      - ./todo-api:/src
+    command: nodemon app.js
