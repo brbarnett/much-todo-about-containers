@@ -17,7 +17,7 @@ var filters = {
     }
 };
 
-exports.app = new Vue.default({
+const vm = new Vue.default({
 
     // the root element that will be compiled
     el: '.todoapp',
@@ -118,3 +118,10 @@ exports.app = new Vue.default({
         }
     }
 });
+
+// initialize
+todoStorage.fetch().then(todos => {
+    vm.todos = todos;
+});
+
+exports.app = vm;
