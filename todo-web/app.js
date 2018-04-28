@@ -24,7 +24,7 @@ exports.app = new Vue.default({
 
     // app initial state
     data: {
-        todos: todoStorage.fetch(),
+        todos: [],
         newTodo: '',
         editedTodo: null,
         visibility: 'all'

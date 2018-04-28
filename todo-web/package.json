@@ -1,12 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "dev": "webpack --watch"
   },
   "dependencies": {},
   "devDependencies": {
+    "axios": "^0.18.0",
     "director": "^1.2.0",
-    "request": "^2.85.0",
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.1",
     "vue": "^2.1.8",
