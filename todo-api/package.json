@@ -2,16 +2,11 @@
   "name": "todo-api",
   "version": "1.0.0",
   "description": "Publicly exposed BFF for todo web app",
-  "main": "app.js",
+  "main": "api.js",
   "scripts": {},
   "author": "Brandon R. Barnett",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
-    "lodash": "^4.17.10",
-    "request": "^2.85.0",
-    "seneca": "^3.4.3",
-    "seneca-jsonrest-api": "^0.3.1"
+    "express": "^4.16.3"
   }
 }

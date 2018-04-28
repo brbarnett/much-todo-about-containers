@@ -1,13 +1,8 @@
-var seneca = require('seneca')()
-    .use('./product_catalog')
-    .use('./api')
-    .ready(function () {
-        this.make$('product')
-            .make$({ id$: 0, name: 'Apple', price: 99, star: 0 }).save$()
-            .make$({ id$: 1, name: 'Orange', price: 199, star: 0 }).save$()
-    })
+var express = require('express');
+var app = express();
 
-var app = require('express')()
-    .use(require('body-parser').json())
-    .use(seneca.export('web'))
-    .listen(3000)
+app.get('/', function (req, res) {
+    res.send({ content: 'do this' });
+});
+
+app.listen(3000);
