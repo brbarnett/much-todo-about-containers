@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+  
+  todo-web:
+    image: brbarnett/todo-web:latest
+    build:
+      context: todo-web
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  backend:
