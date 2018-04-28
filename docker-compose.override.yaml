@@ -3,6 +3,8 @@ version: '3.6'
 services:
   
   todo-web:
+    build:
+      dockerfile: Dockerfile-Dev
     ports:
       - '8081:80'
     volumes:
