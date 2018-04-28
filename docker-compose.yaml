@@ -8,6 +8,16 @@ services:
       context: todo-web
     networks:
       - frontend
+  
+  todo-api:
+    image: brbarnett/todo-api:latest
+    build:
+      context: todo-api
+    networks:
+      - frontend
+      - backend
+
+  #todos:
 
 networks:
   frontend:
