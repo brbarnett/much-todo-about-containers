@@ -2,9 +2,13 @@ version: '3.6'
 
 services:
   
+  todo-bff:
+    ports:
+      - "8083:80"
+
   todo-web:
     build:
-      dockerfile: Dockerfile-Dev
+      dockerfile: Dockerfile.dev
     ports:
       - '8081:80'
     volumes:
@@ -12,7 +16,7 @@ services:
 
   todo-api:
     build:
-      dockerfile: Dockerfile-Dev
+      dockerfile: Dockerfile.dev
     ports:
       - '8082:3000'
     volumes:

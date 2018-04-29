@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './app.js',
@@ -16,5 +17,10 @@ module.exports = {
         fs: 'empty',
         net: 'empty',
         tls: 'empty'
-    }
+    },
+    plugins: [
+        new webpack.EnvironmentPlugin([
+            "API_URL"
+        ])
+    ]
 };

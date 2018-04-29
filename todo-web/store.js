@@ -1,6 +1,9 @@
 const axios = require('axios');
 const service = httpService();
 
+const apiUrl = process.env.API_URL;
+console.log(apiUrl);
+
 module.exports = todoStorage = {
     fetch: service.getAll,
     save: service.save
@@ -16,7 +19,7 @@ function httpService() {
         return new Promise(function (resolve, reject) {
             console.log('getting all todos');
             axios
-                .get("http://localhost:8082")
+                .get(process.env.API_URL)
                 .then(resp => {
                     resolve(resp.data);
                 })
@@ -27,7 +30,7 @@ function httpService() {
         return new Promise(function (resolve, reject) {
             console.log('getting all todos');
             axios
-                .post("http://localhost:8082", todos)
+                .post(process.env.API_URL, todos)
                 .then(resp => {
                     resolve(null);
                 })

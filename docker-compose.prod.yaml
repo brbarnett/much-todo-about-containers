@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  
+  todo-bff:
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 2
+
+  todo-web:
+    deploy:
+      replicas: 2
+
+  todo-api:
+    deploy:
+      replicas: 1

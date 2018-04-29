@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "dev": "webpack --watch"
+    "dev": "webpack --watch",
+    "release": "webpack --env.production"
   },
   "dependencies": {},
   "devDependencies": {
