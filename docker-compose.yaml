@@ -3,21 +3,21 @@ version: '3.6'
 services:
   
   todo-bff:
-    image: brbarnett/todo-bff:latest
+    image: brbarnett/todo-bff
     build:
       context: todo-bff
     networks:
       - frontend
 
   todo-web:
-    image: brbarnett/todo-web:latest
+    image: brbarnett/todo-web
     build:
       context: todo-web
     networks:
       - frontend
   
   todo-api:
-    image: brbarnett/todo-api:latest
+    image: brbarnett/todo-api
     build:
       context: todo-api
     networks:
