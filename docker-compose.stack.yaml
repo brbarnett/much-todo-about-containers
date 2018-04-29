@@ -1,0 +1,34 @@
+networks:
+  backend: {}
+  frontend: {}
+services:
+  todo-api:
+    build:
+      context: /Users/brbarnett/Dev/much-todo-about-containers/todo-api
+    deploy:
+      replicas: 1
+    image: brbarnett/todo-api
+    networks:
+      backend: null
+      frontend: null
+  todo-bff:
+    build:
+      context: /Users/brbarnett/Dev/much-todo-about-containers/todo-bff
+    deploy:
+      replicas: 1
+    image: brbarnett/todo-bff
+    networks:
+      frontend: null
+    ports:
+    - published: 80
+      target: 80
+  todo-web:
+    build:
+      context: /Users/brbarnett/Dev/much-todo-about-containers/todo-web
+    deploy:
+      replicas: 1
+    image: brbarnett/todo-web
+    networks:
+      frontend: null
+version: '3.6'
+
