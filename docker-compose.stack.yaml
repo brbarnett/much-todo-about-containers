@@ -15,7 +15,7 @@ services:
     build:
       context: /Users/brbarnett/Dev/much-todo-about-containers/todo-bff
     deploy:
-      replicas: 1
+      replicas: 2
     image: brbarnett/todo-bff
     networks:
       frontend: null
@@ -26,7 +26,7 @@ services:
     build:
       context: /Users/brbarnett/Dev/much-todo-about-containers/todo-web
     deploy:
-      replicas: 1
+      replicas: 2
     image: brbarnett/todo-web
     networks:
       frontend: null
