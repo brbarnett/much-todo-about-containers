@@ -10,7 +10,7 @@ services:
 
   todo-web:
     deploy:
-      replicas: 2
+      replicas: 3
 
   todo-api:
     environment:

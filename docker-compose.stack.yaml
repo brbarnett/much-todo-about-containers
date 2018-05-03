@@ -4,16 +4,18 @@ networks:
 services:
   todo-api:
     build:
-      context: /Users/brbarnett/Dev/much-todo-about-containers/todo-api
+      context: todo-api
     deploy:
       replicas: 1
     image: brbarnett/todo-api
+    environment:
+      - PORT=80
     networks:
       backend: null
       frontend: null
   todo-bff:
     build:
-      context: /Users/brbarnett/Dev/much-todo-about-containers/todo-bff
+      context: todo-bff
     deploy:
       replicas: 2
     image: brbarnett/todo-bff
@@ -24,9 +26,9 @@ services:
       target: 80
   todo-web:
     build:
-      context: /Users/brbarnett/Dev/much-todo-about-containers/todo-web
+      context: todo-web
     deploy:
-      replicas: 2
+      replicas: 3
     image: brbarnett/todo-web
     networks:
       frontend: null
