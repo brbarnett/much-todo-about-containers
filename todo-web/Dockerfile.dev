@@ -3,6 +3,8 @@ RUN apk add --no-cache nodejs
 WORKDIR /usr/local/apache2/htdocs/
 COPY . .
 RUN npm install
-
-ENV API_URL=http://localhost:8082
 RUN npm run build
+
+RUN ["chmod", "+x", "config.sh"]
+
+CMD ["config.sh"]
