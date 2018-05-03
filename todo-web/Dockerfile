@@ -3,7 +3,6 @@ WORKDIR /src
 COPY . .
 RUN npm install
 
-#ENV API_URL=http://localhost/api
 RUN npm run release
 
 FROM httpd:alpine
