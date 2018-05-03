@@ -18,9 +18,9 @@ module.exports = {
         net: 'empty',
         tls: 'empty'
     },
-    plugins: [
-        new webpack.EnvironmentPlugin([
-            "API_URL"
-        ])
-    ]
+    devServer: {
+        proxy: {
+            "/api": "http://localhost:3000"
+          }
+      }
 };

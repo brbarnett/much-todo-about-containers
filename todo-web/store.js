@@ -1,8 +1,8 @@
 const axios = require('axios');
 const service = httpService();
 
-const apiUrl = process.env.API_URL;
-console.log(apiUrl);
+const apiUrl = '/api';
+console.log('API:', apiUrl);
 
 module.exports = todoStorage = {
     fetch: service.getAll,
@@ -17,9 +17,8 @@ function httpService() {
 
     function getAll() {
         return new Promise(function (resolve, reject) {
-            console.log('getting all todos');
             axios
-                .get(process.env.API_URL)
+                .get(apiUrl)
                 .then(resp => {
                     resolve(resp.data);
                 })
@@ -28,9 +27,8 @@ function httpService() {
 
     function save(todos) {
         return new Promise(function (resolve, reject) {
-            console.log('getting all todos');
             axios
-                .post(process.env.API_URL, todos)
+                .post(apiUrl, todos)
                 .then(resp => {
                     resolve(null);
                 })
@@ -48,7 +46,6 @@ function mockService() {
 
     function getAll() {
         return new Promise(function (resolve, reject) {
-            console.log('getting all todos');
             setTimeout(resolve, 100, data);
         });
     }
@@ -56,7 +53,6 @@ function mockService() {
     function save(todos) {
         return new Promise(function (resolve, reject) {
             data = todos;
-            console.log('set todos to' + JSON.stringify(todos));
 
             setTimeout(resolve, 100, null);
         })

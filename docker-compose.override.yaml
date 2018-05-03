@@ -21,4 +21,6 @@ services:
       - '8082:3000'
     volumes:
       - ./todo-api:/src
+    environment:
+      - PORT=3000
     command: nodemon app.js

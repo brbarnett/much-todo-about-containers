@@ -27,3 +27,26 @@ _If you have other helpful links to share, or find any of the links above no lon
 ## Credit
 
 This TodoMVC application was created by [Evan You](http://evanyou.me).
+
+
+### How to inject a config file into httpd using a shell script
+
+Dockerfile
+```
+RUN ["chmod", "+x", "./config.sh"]
+
+CMD ["/usr/local/apache2/htdocs/config.sh"]
+```
+
+config.sh
+```
+#!/bin/bash
+echo "window.appConfig = { API_URL: '${!API_URL}'} " >> config.js
+nginx -g "daemon off;"
+```
+
+docker-compose.override.yaml
+```
+environment:
+      - API_URL=http://localhost:8082
+```

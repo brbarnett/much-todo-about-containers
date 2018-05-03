@@ -13,5 +13,7 @@ services:
       replicas: 2
 
   todo-api:
+    environment:
+      - PORT=80
     deploy:
       replicas: 1
