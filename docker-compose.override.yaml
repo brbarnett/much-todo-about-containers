@@ -7,20 +7,11 @@ services:
       - "8083:80"
 
   todo-web:
-    build:
-      dockerfile: Dockerfile.dev
     ports:
       - '8081:80'
-    volumes:
-      - ./todo-web:/usr/local/apache2/htdocs/:ro
 
   todo-api:
-    build:
-      dockerfile: Dockerfile.dev
     ports:
       - '8082:3000'
-    volumes:
-      - ./todo-api:/src
     environment:
       - PORT=3000
-    command: nodemon app.js

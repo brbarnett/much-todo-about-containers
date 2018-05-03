@@ -1,6 +1,0 @@
-FROM httpd:alpine as build-env
-RUN apk add --no-cache nodejs
-WORKDIR /usr/local/apache2/htdocs/
-COPY . .
-RUN npm install
-RUN npm run build
