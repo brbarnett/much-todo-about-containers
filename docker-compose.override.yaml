@@ -13,6 +13,8 @@ services:
       - '8081:80'
     volumes:
       - ./todo-web:/usr/local/apache2/htdocs/:ro
+    environment:
+      - API_URL=http://localhost:8082
 
   todo-api:
     build:
@@ -21,4 +23,6 @@ services:
       - '8082:3000'
     volumes:
       - ./todo-api:/src
+    environment:
+      - PORT=3000
     command: nodemon app.js
