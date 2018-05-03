@@ -5,6 +5,6 @@ COPY . .
 RUN npm install
 RUN npm run build
 
-RUN ["chmod", "+x", "config.sh"]
+RUN ["chmod", "+x", "./config.sh"]
 
-CMD ["config.sh"]
+CMD ["/usr/local/apache2/htdocs/config.sh"]
