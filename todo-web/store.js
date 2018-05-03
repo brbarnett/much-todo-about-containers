@@ -1,7 +1,7 @@
 const axios = require('axios');
 const service = httpService();
 
-const apiUrl = window.appConfig.API_URL;
+const apiUrl = '/api';
 console.log('API:', apiUrl);
 
 module.exports = todoStorage = {
