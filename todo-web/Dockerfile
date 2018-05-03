@@ -2,7 +2,6 @@ FROM node:8.11.1 as build-env
 WORKDIR /src
 COPY . .
 RUN npm install
-
 RUN npm run release
 
 FROM httpd:alpine
