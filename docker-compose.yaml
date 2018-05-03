@@ -8,6 +8,10 @@ services:
       context: todo-bff
     networks:
       - frontend
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 2
 
   todo-web:
     image: brbarnett/todo-web
@@ -15,6 +19,8 @@ services:
       context: todo-web
     networks:
       - frontend
+    deploy:
+      replicas: 3
   
   todo-api:
     image: brbarnett/todo-api
@@ -23,6 +29,10 @@ services:
     networks:
       - frontend
       - backend
+    environment:
+      - PORT=80
+    deploy:
+      replicas: 1
 
   #todos:
 
