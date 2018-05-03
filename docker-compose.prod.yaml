@@ -9,6 +9,8 @@ services:
       replicas: 2
 
   todo-web:
+    environment:
+      - API_URL=http://localhost/api
     deploy:
       replicas: 2
 

@@ -12,9 +12,9 @@ services:
     ports:
       - '8081:80'
     volumes:
-      - ./todo-web:/usr/local/apache2/htdocs/:ro
+      - ./todo-web:/usr/local/apache2/htdocs/
     environment:
-      - API_URL=http://localhost:8082
+      - API_URL=http://localhost:8082/api
 
   todo-api:
     build:

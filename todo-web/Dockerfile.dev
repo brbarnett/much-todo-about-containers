@@ -7,4 +7,4 @@ RUN npm run build
 
 RUN ["chmod", "+x", "./config.sh"]
 
-CMD ["/usr/local/apache2/htdocs/config.sh"]
+CMD ["bash", "/usr/local/apache2/htdocs/config.sh"]

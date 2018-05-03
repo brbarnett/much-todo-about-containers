@@ -17,5 +17,10 @@ module.exports = {
         fs: 'empty',
         net: 'empty',
         tls: 'empty'
-    }
+    },
+    devServer: {
+        proxy: {
+            "/api": "http://localhost:3000"
+          }
+      }
 };
