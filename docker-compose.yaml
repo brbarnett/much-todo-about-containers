@@ -26,6 +26,13 @@ services:
 
   #todos:
 
+  # visualizer:
+  #   image: dockersamples/visualizer
+  #   ports:
+  #     - 8084:8080
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+
 networks:
   frontend:
   backend:
