@@ -23,7 +23,7 @@ node api
 ## Deploying the app to Docker Swarm
 Run the following in terminal
 ```
-docker-compose -f docker-compose.stack.yaml build
+docker-compose -f docker-compose.stack.yaml build # only run this if you want to run from local images
 
 docker stack deploy --compose-file docker-compose.stack.yaml todo-stack
 
