@@ -2,10 +2,10 @@ version: '3.6'
 
 services:
   
-  todo-bff:
-    image: brbarnett/todo-bff
+  todo-ingress:
+    image: brbarnett/todo-ingress
     build:
-      context: todo-bff
+      context: ./src/ingress
     networks:
       - frontend
     ports:
@@ -16,7 +16,7 @@ services:
   todo-web:
     image: brbarnett/todo-web
     build:
-      context: todo-web
+      context: ./src/web
     networks:
       - frontend
     deploy:
@@ -25,7 +25,7 @@ services:
   todo-api:
     image: brbarnett/todo-api
     build:
-      context: todo-api
+      context: ./src/api
     networks:
       - frontend
       - backend
@@ -33,15 +33,6 @@ services:
       - PORT=80
     deploy:
       replicas: 1
-
-  #todos:
-
-  # visualizer:
-  #   image: dockersamples/visualizer
-  #   ports:
-  #     - 8084:8080
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   frontend:

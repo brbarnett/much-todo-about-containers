@@ -9,14 +9,14 @@ Docker version v18.03.0-ce
 ## Testing
 ### todo-web
 ```
-cd todo-web
+cd src/web
 npm run serve
 ```
 Navigate to http://localhost:8080
 
 ### todo-api
 ```
-cd todo-api
+cd src/api
 node api
 ```
 
@@ -38,11 +38,11 @@ Run the following in terminal
 ```
 minikube addons enable ingress
 
-kubectl apply -f ingress/ingress.deployment.yaml
+kubectl apply -f src/ingress/deployment.yaml
 
-kubectl apply -f todo-api/todo-api.deployment.yaml
+kubectl apply -f src/api/deployment.yaml
 
-kubectl apply -f todo-web/todo-web.deployment.yaml
+kubectl apply -f src/web/deployment.yaml
 
 minikube ip # use output to navigate to http://{ip}:80
 ```

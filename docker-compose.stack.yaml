@@ -4,7 +4,7 @@ networks:
 services:
   todo-api:
     build:
-      context: todo-api
+      context: ./src/api
     deploy:
       replicas: 1
     image: brbarnett/todo-api
@@ -13,12 +13,12 @@ services:
     networks:
       backend: null
       frontend: null
-  todo-bff:
+  todo-ingress:
     build:
-      context: todo-bff
+      context: ./src/ingress
     deploy:
       replicas: 2
-    image: brbarnett/todo-bff
+    image: brbarnett/todo-ingress
     networks:
       frontend: null
     ports:
@@ -26,7 +26,7 @@ services:
       target: 80
   todo-web:
     build:
-      context: todo-web
+      context: ./src/web
     deploy:
       replicas: 3
     image: brbarnett/todo-web
