@@ -3,7 +3,7 @@ version: '3.6'
 services:
   
   todo-ingress:
-    image: brbarnett/todo-ingress
+    image: brbarnett/todo-ingress:ci
     build:
       context: ./src/ingress
     networks:
@@ -14,7 +14,7 @@ services:
       replicas: 2
 
   todo-web:
-    image: brbarnett/todo-web
+    image: brbarnett/todo-web:ci
     build:
       context: ./src/web
     networks:
@@ -23,7 +23,7 @@ services:
       replicas: 3
   
   todo-api:
-    image: brbarnett/todo-api
+    image: brbarnett/todo-api:ci
     build:
       context: ./src/api
     networks:

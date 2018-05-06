@@ -7,7 +7,7 @@ services:
       context: ./src/api
     deploy:
       replicas: 1
-    image: brbarnett/todo-api
+    image: brbarnett/todo-api:ci
     environment:
       - PORT=80
     networks:
@@ -18,7 +18,7 @@ services:
       context: ./src/ingress
     deploy:
       replicas: 2
-    image: brbarnett/todo-ingress
+    image: brbarnett/todo-ingress:ci
     networks:
       frontend: null
     ports:
@@ -29,7 +29,7 @@ services:
       context: ./src/web
     deploy:
       replicas: 3
-    image: brbarnett/todo-web
+    image: brbarnett/todo-web:ci
     networks:
       frontend: null
 version: '3.6'
