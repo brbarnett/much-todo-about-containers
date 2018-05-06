@@ -19,6 +19,7 @@ app.post('/', function(req, res){
 
 // catch all 404
 app.all('*', function(req, res){
+    console.log(req.originalUrl);
     res.sendStatus(404);
 })
  
