@@ -1,7 +1,7 @@
 {
   "name": "todo-api",
   "version": "1.0.0",
-  "description": "Publicly exposed BFF for todo web app",
+  "description": "",
   "main": "api.js",
   "scripts": {},
   "author": "Brandon R. Barnett",
