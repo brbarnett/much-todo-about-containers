@@ -28,6 +28,6 @@ spec:
     spec:
       containers:
       - name: todo-web
-        image: brbarnett/todo-web
+        image: brbarnett/todo-web:ci
         ports:
         - containerPort: 80
