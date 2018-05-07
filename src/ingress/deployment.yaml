@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: todo-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - http:
@@ -12,7 +12,7 @@ spec:
         backend:
           serviceName: todo-web
           servicePort: 80
-      - path: /api
+      - path: /api/
         backend:
           serviceName: todo-api
           servicePort: 80
