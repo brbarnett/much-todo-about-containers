@@ -123,7 +123,7 @@ You will have to wait to hit your public IP directly until the load balancer fin
 
 AKS clusters can be expensive -- don't forget to spin it down if you're not using it
 ```
-az aks delete 
+az aks delete \
     --name todo-aks-cluster \
     --resource-group much-todo-about-containers \
     --no-wait \
