@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: todo-api
 spec:
-  type: NodePort
   ports:
   - port: 80
     targetPort: 80
