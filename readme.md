@@ -54,6 +54,7 @@ Create an AKS cluster (docs: https://docs.microsoft.com/en-us/cli/azure/aks?view
 - Azure CLI (this was tested on v2.0.32)
 - Helm (https://docs.helm.sh/using_helm/#installing-helm)
 
+### Intialize AKS cluster
 ```
 az login
 az account set --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
@@ -79,14 +80,16 @@ az aks get-credentials --name todo-aks-cluster --resource-group much-todo-about-
 az aks show --resource-group much-todo-about-containers --name todo-aks-cluster
 ```
 
-Initialize Helm on the cluster
+The following is largely based off of this tutorial: https://blog.n1analytics.com/free-automated-tls-certificates-on-k8s/
+
+### Initialize Helm on the cluster
 ```
 helm init --upgrade --service-account default   # required, otherwise you get a 'no available release name' error
 
 helm repo update
 ```
-https://blog.n1analytics.com/free-automated-tls-certificates-on-k8s/
-Deploy the ingress controller
+
+### Deploy the ingress controller
 ```
 helm install stable/nginx-ingress \
     --name nginx-ingress \
@@ -97,7 +100,7 @@ helm install stable/nginx-ingress \
 kubectl get service -l app=nginx-ingress --namespace kube-system    # it will take a bit before the external IP shows up
 ```
 
-Install cert-manager for Let's Encrypt TLS support
+### Install cert-manager for Let's Encrypt TLS support
 ```
 helm install stable/cert-manager \
     --name cert-manager \
@@ -108,7 +111,7 @@ helm install stable/cert-manager \
 kubectl apply -f src/ingress/tls/issuer-prod.yaml
 ```
 
-Deploy the application
+### Deploy the application
 ```
 kubectl apply -f src/ingress/ingress.yaml
 
