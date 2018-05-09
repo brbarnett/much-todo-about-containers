@@ -1,0 +1,31 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Issuer
+metadata:
+  name: letsencrypt
+  namespace: default
+spec:
+  acme:
+    server: https://acme-staging.api.letsencrypt.org/directory
+    email: bbarnett@rightpoint.com
+    privateKeySecretRef:
+      name: letsencrypt
+    http01: {}
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: todo-aks-cluster-domain
+  namespace: default
+spec:
+  secretName: todo-aks-cluster-domain-tls
+  issuerRef:
+    name: letsencrypt
+  commonName: todo-aks-cluster.centralus.cloudapp.azure.com
+  dnsNames:
+  - todo-aks-cluster.centralus.cloudapp.azure.com
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - todo-aks-cluster.centralus.cloudapp.azure.com

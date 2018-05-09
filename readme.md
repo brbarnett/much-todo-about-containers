@@ -50,7 +50,9 @@ minikube ip # use output to navigate to http://{ip}:80
 ## Deploying the app to Kubernetes (Azure AKS cluster)
 Create an AKS cluster (docs: https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest)
 
-_Tested using Azure CLI v2.0.32_
+### Prerequisites
+- Azure CLI (this was tested on v2.0.32)
+- Helm (https://docs.helm.sh/using_helm/#installing-helm)
 
 ```
 az login
@@ -80,16 +82,42 @@ az aks browse --resource-group much-todo-about-containers --name todo-aks-cluste
 az aks show --resource-group much-todo-about-containers --name todo-aks-cluster
 ```
 
+Initialize Helm on the cluster
+```
+helm init
+
+helm repo update
+```
+
+Deploy the ingress controller
+```
+helm install stable/nginx-ingress \
+    --namespace kube-system \
+    --set controller.service.loadBalancerIP=52.173.29.52    # this connects to the static IP you just provisioned and sets up a Load Balancer resource in Azure
+
+kubectl get service -l app=nginx-ingress --namespace kube-system    # it will take a bit before the external IP shows up
+```
+_Note: if you have issues with Tiller not finding a release name, try this: https://github.com/kubernetes/helm/issues/3055_
+
+Install cert-manager for Let's Encrypt TLS support
+```
+helm install stable/cert-manager \
+    --name cert-manager \
+    --namespace kube-system \
+    --set rbac.create=false     # AKS does not support RBAC at this time
+
+kubectl apply -f src/ingress/letsencrypt.yaml
+```
+
 Deploy the application
 ```
-kubectl apply -f src/load-balancer/default.deployment.yaml
-kubectl apply -f src/load-balancer/deployment.yaml          # note: add your public IP in the load balancer config
-
 kubectl apply -f src/ingress/deployment.yaml
 
 kubectl apply -f src/api/deployment.yaml
 
 kubectl apply -f src/web/deployment.yaml
+
+kubectl get services --all-namespaces   # view all running services
 ```
 You will have to wait to hit your public IP directly until the load balancer finishes provisioning. The cluster is available here: https://todo-aks-cluster.centralus.cloudapp.azure.com/
 
