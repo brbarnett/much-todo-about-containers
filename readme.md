@@ -49,6 +49,9 @@ minikube ip # use output to navigate to http://{ip}:80
 
 ## Deploying the app to Kubernetes (Azure AKS cluster)
 Create an AKS cluster (docs: https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest)
+
+_Tested using Azure CLI v2.0.32_
+
 ```
 az login
 az account set --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
@@ -88,7 +91,7 @@ kubectl apply -f src/api/deployment.yaml
 
 kubectl apply -f src/web/deployment.yaml
 ```
-You will have to wait to hit your public IP directly until the load balancer finishes provisioning.
+You will have to wait to hit your public IP directly until the load balancer finishes provisioning. The cluster is available here: https://todo-aks-cluster.centralus.cloudapp.azure.com/
 
 AKS clusters can be expensive -- don't forget to spin it down if you're not using it
 ```
