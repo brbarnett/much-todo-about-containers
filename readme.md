@@ -65,8 +65,7 @@ az aks create \
     --generate-ssh-keys \
     --location centralus \
     --node-count 3 \
-    --node-vm-size Standard_DS1_v2 \
-    --no-wait
+    --node-vm-size Standard_DS1_v2
 
 az network public-ip create \
     --name todo-aks-public-ip \
@@ -77,43 +76,41 @@ az network public-ip create \
 
 az aks get-credentials --name todo-aks-cluster --resource-group much-todo-about-containers
 
-az aks browse --resource-group much-todo-about-containers --name todo-aks-cluster
-
 az aks show --resource-group much-todo-about-containers --name todo-aks-cluster
 ```
 
 Initialize Helm on the cluster
 ```
-helm init
+helm init --upgrade --service-account default   # required, otherwise you get a 'no available release name' error
 
 helm repo update
 ```
-
+https://blog.n1analytics.com/free-automated-tls-certificates-on-k8s/
 Deploy the ingress controller
 ```
 helm install stable/nginx-ingress \
+    --name nginx-ingress \
     --namespace kube-system \
-    --set controller.service.loadBalancerIP=52.173.29.52    # this connects to the static IP you just provisioned and sets up a Load Balancer resource in Azure
+    --set controller.service.loadBalancerIP=104.43.217.79 \    # this connects to the static IP you just provisioned and sets up a Load Balancer resource in Azure
+    --set rbac.create=false
 
 kubectl get service -l app=nginx-ingress --namespace kube-system    # it will take a bit before the external IP shows up
 ```
-_Note: if you have issues with Tiller not finding a release name, try this: https://github.com/kubernetes/helm/issues/3055_
 
 Install cert-manager for Let's Encrypt TLS support
 ```
 helm install stable/cert-manager \
     --name cert-manager \
     --namespace kube-system \
+    --set ingressShim.extraArgs='{--default-issuer-name=letsencrypt-prod,--default-issuer-kind=Issuer}' \
     --set rbac.create=false     # AKS does not support RBAC at this time
 
-kubectl apply -f src/ingress/tls/issuer.yaml
-
-kubectl apply -f src/ingress/tls/cert.yaml
+kubectl apply -f src/ingress/tls/issuer-prod.yaml
 ```
 
 Deploy the application
 ```
-kubectl apply -f src/ingress/deployment.yaml
+kubectl apply -f src/ingress/ingress.yaml
 
 kubectl apply -f src/api/deployment.yaml
 
