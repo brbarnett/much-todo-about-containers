@@ -1,12 +1,12 @@
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: todo-aks-cluster-domain
+  name: test-todo-aks-cluster-com
   namespace: default
 spec:
-  secretName: todo-aks-cluster-domain-tls
+  secretName: test-todo-aks-cluster-com-tls
   issuerRef:
-    name: letsencrypt
+    name: letsencrypt-staging
   commonName: todo-aks-cluster.centralus.cloudapp.azure.com
   dnsNames:
   - todo-aks-cluster.centralus.cloudapp.azure.com
