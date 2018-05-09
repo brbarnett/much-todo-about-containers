@@ -106,7 +106,9 @@ helm install stable/cert-manager \
     --namespace kube-system \
     --set rbac.create=false     # AKS does not support RBAC at this time
 
-kubectl apply -f src/ingress/letsencrypt.yaml
+kubectl apply -f src/ingress/tls/issuer.yaml
+
+kubectl apply -f src/ingress/tls/cert.yaml
 ```
 
 Deploy the application
