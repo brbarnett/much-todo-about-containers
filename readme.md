@@ -50,8 +50,11 @@ minikube ip # use output to navigate to http://{ip}:80
 ## Deploying the app to Kubernetes (Azure AKS cluster)
 Create an AKS cluster (docs: https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest)
 
-_Tested using Azure CLI v2.0.32_
+### Prerequisites
+- Azure CLI (this was tested on v2.0.32)
+- Helm (https://docs.helm.sh/using_helm/#installing-helm)
 
+### Intialize AKS cluster
 ```
 az login
 az account set --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
@@ -63,8 +66,7 @@ az aks create \
     --generate-ssh-keys \
     --location centralus \
     --node-count 3 \
-    --node-vm-size Standard_DS1_v2 \
-    --no-wait
+    --node-vm-size Standard_DS1_v2
 
 az network public-ip create \
     --name todo-aks-public-ip \
@@ -75,27 +77,55 @@ az network public-ip create \
 
 az aks get-credentials --name todo-aks-cluster --resource-group much-todo-about-containers
 
-az aks browse --resource-group much-todo-about-containers --name todo-aks-cluster
-
 az aks show --resource-group much-todo-about-containers --name todo-aks-cluster
 ```
 
-Deploy the application
-```
-kubectl apply -f src/load-balancer/default.deployment.yaml
-kubectl apply -f src/load-balancer/deployment.yaml          # note: add your public IP in the load balancer config
+The following is largely based off of this tutorial: https://blog.n1analytics.com/free-automated-tls-certificates-on-k8s/
 
-kubectl apply -f src/ingress/deployment.yaml
+### Initialize Helm on the cluster
+```
+helm init --upgrade --service-account default   # required, otherwise you get a 'no available release name' error
+
+helm repo update
+```
+
+### Deploy the ingress controller
+```
+helm install stable/nginx-ingress \
+    --name nginx-ingress \
+    --namespace kube-system \
+    --set controller.service.loadBalancerIP=104.43.217.79 \    # this connects to the static IP you just provisioned and sets up a Load Balancer resource in Azure
+    --set rbac.create=false
+
+kubectl get service -l app=nginx-ingress --namespace kube-system    # it will take a bit before the external IP shows up
+```
+
+### Install cert-manager for Let's Encrypt TLS support
+```
+helm install stable/cert-manager \
+    --name cert-manager \
+    --namespace kube-system \
+    --set ingressShim.extraArgs='{--default-issuer-name=letsencrypt-prod,--default-issuer-kind=Issuer}' \
+    --set rbac.create=false     # AKS does not support RBAC at this time
+
+kubectl apply -f src/ingress/tls/issuer-prod.yaml
+```
+
+### Deploy the application
+```
+kubectl apply -f src/ingress/ingress.yaml
 
 kubectl apply -f src/api/deployment.yaml
 
 kubectl apply -f src/web/deployment.yaml
+
+kubectl get services --all-namespaces   # view all running services
 ```
 You will have to wait to hit your public IP directly until the load balancer finishes provisioning. The cluster is available here: https://todo-aks-cluster.centralus.cloudapp.azure.com/
 
 AKS clusters can be expensive -- don't forget to spin it down if you're not using it
 ```
-az aks delete 
+az aks delete \
     --name todo-aks-cluster \
     --resource-group much-todo-about-containers \
     --no-wait \
