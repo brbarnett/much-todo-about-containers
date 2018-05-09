@@ -3,17 +3,16 @@ kind: Ingress
 metadata:
   name: todo-ingress
   annotations:
+    kubernetes.io/ingress.class: nginx
     ingress.kubernetes.io/rewrite-target: /
-    certmanager.k8s.io/issuer: letsencypt
-    certmanager.k8s.io/acme-challenge-type: http01
     kubernetes.io/tls-acme: "true"
 spec:
   tls:
     - hosts:
       - todo-aks-cluster.centralus.cloudapp.azure.com
-      secretName: letsencrypt
+      secretName: todo-aks-cluster-com-tls
   rules:
-  - host: demo-aks-ingress.eastus.cloudapp.azure.com
+  - host: todo-aks-cluster.centralus.cloudapp.azure.com
     http:
       paths:
       - path: /
