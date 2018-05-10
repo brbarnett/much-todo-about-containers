@@ -12,6 +12,6 @@ services:
 
   todo-api:
     ports:
-      - '8082:3000'
+      - '8082:80'
     environment:
-      - PORT=3000
+      - PORT=80
