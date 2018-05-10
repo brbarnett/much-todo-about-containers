@@ -131,3 +131,12 @@ az aks delete \
     --no-wait \
     --yes
 ```
+
+Alternatively, you could scale the cluster down when you're not using it heavily
+```
+az aks scale \
+    --name todo-aks-cluster \
+    --resource-group much-todo-about-containers \
+    --node-count 1 \
+    --no-wait
+```
