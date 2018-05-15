@@ -26,13 +26,12 @@ module.exports = {
 
             let data = [{ "id": 1, "title": "this one", "completed": false }, { "id": 2, "title": "that one", "completed": false }, { "id": 3, "title": "another", "completed": false }, { "id": 4, "title": "here", "completed": false }];
             app.get('/api', function (req, res) {
-                res.send(data);
+                res.json(data);
             });
-            app.post('/api', function (res, req) {
-                if(!req) return;
-
-                console.log(req);
+            app.post('/api', function (req, res) {
                 data = req.body;
+
+                res.json({success: true});
             })
         },
         hot: true
