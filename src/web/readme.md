@@ -1,52 +1,37 @@
-# Vue.js TodoMVC Example
+# React TodoMVC Example
 
-> Vue.js is a library for building interactive web interfaces.
-It provides data-driven, nestable view components with a simple and flexible API.
+> React is a JavaScript library for creating user interfaces. Its core principles are declarative code, efficiency, and flexibility. Simply specify what your component looks like and React will keep it up-to-date when the underlying data changes.
 
-> _[Vue.js - vuejs.org](http://vuejs.org)_
+> _[React - facebook.github.io/react](http://facebook.github.io/react)_
 
-## Learning Vue.js
 
-The [Vue.js website](http://vuejs.org/) is a great resource to get started.
+## Learning React
+
+The [React getting started documentation](http://facebook.github.io/react/docs/getting-started.html) is a great way to get started.
 
 Here are some links you may find helpful:
 
-* [Official Guide](http://vuejs.org/guide/)
-* [API Reference](http://vuejs.org/api/)
-* [Examples](http://vuejs.org/examples/)
-* [Building Larger Apps with Vue.js](http://v1.vuejs.org/guide/application.html)
+* [Documentation](http://facebook.github.io/react/docs/getting-started.html)
+* [API Reference](http://facebook.github.io/react/docs/reference.html)
+* [Blog](http://facebook.github.io/react/blog/)
+* [React on GitHub](https://github.com/facebook/react)
+* [Support](http://facebook.github.io/react/support.html)
 
-Get help from other Vue.js users:
+Articles and guides from the community:
 
-* [Vue.js on Twitter](https://twitter.com/vuejs)
-* [Vue.js on Gitter](https://gitter.im/vuejs/vue)
-* [Vue.js Forum](http://forum.vuejs.org)
+* [How is Facebook's React JavaScript library](http://www.quora.com/React-JS-Library/How-is-Facebooks-React-JavaScript-library)
+* [React: Under the hood](http://www.quora.com/Pete-Hunt/Posts/React-Under-the-Hood)
+
+Get help from other React users:
+
+* [React on StackOverflow](http://stackoverflow.com/questions/tagged/reactjs)
+* [Discussion Forum](https://discuss.reactjs.org/)
 
 _If you have other helpful links to share, or find any of the links above no longer work, please [let us know](https://github.com/tastejs/todomvc/issues)._
 
-## Credit
 
-This TodoMVC application was created by [Evan You](http://evanyou.me).
+## Running
 
+The app is built with [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and compiled at runtime for a lighter and more fun code reading experience. As stated in the link, JSX is not mandatory.
 
-### How to inject a config file into httpd using a shell script
-
-Dockerfile
-```
-RUN ["chmod", "+x", "./config.sh"]
-
-CMD ["/usr/local/apache2/htdocs/config.sh"]
-```
-
-config.sh
-```
-#!/bin/bash
-echo "window.appConfig = { API_URL: '${!API_URL}'} " >> config.js
-nginx -g "daemon off;"
-```
-
-docker-compose.override.yaml
-```
-environment:
-      - API_URL=http://localhost:8082
-```
+To run the app, spin up an HTTP server (e.g. `python -m SimpleHTTPServer`) and visit http://localhost/.../myexample/.
