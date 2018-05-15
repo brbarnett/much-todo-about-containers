@@ -2,22 +2,23 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './app.js',
+    entry: './src/app.jsx',
     mode: 'development',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
-    resolve: {
-        alias: {
-            'vue$': 'vue/dist/vue.esm.js'
-        }
-    },
-    node: {
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty'
-    },
+    module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader"
+            }
+          }
+        ]
+      },
     devServer: {
         // proxy: { "/api": "http://localhost:3000" },  // proxy all API calls to node api app. must be running
         before(app) {   // serve a mock from webpack
