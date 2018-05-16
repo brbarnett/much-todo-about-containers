@@ -1,4 +1,6 @@
-import Util from './utils';
+import Utils from './utils';
+
+const utils = new Utils();
 
 // Generic "model" object. You can use whatever
 // framework you want. For this application it
@@ -7,7 +9,7 @@ import Util from './utils';
 // separate out parts of your application.
 const TodoModel = function (key) {
     this.key = key;
-    this.todos = Utils.store(key);
+    this.todos = utils.store(key);
     this.onChanges = [];
 };
 
@@ -16,13 +18,13 @@ TodoModel.prototype.subscribe = function (onChange) {
 };
 
 TodoModel.prototype.inform = function () {
-    Utils.store(this.key, this.todos);
+    utils.store(this.key, this.todos);
     this.onChanges.forEach(function (cb) { cb(); });
 };
 
 TodoModel.prototype.addTodo = function (title) {
     this.todos = this.todos.concat({
-        id: Utils.uuid(),
+        id: utils.uuid(),
         title: title,
         completed: false
     });
@@ -46,7 +48,7 @@ TodoModel.prototype.toggle = function (todoToToggle) {
     this.todos = this.todos.map(function (todo) {
         return todo !== todoToToggle ?
             todo :
-            Utils.extend({}, todo, { completed: !todo.completed });
+            utils.extend({}, todo, { completed: !todo.completed });
     });
 
     this.inform();
@@ -62,7 +64,7 @@ TodoModel.prototype.destroy = function (todo) {
 
 TodoModel.prototype.save = function (todoToSave, text) {
     this.todos = this.todos.map(function (todo) {
-        return todo !== todoToSave ? todo : Utils.extend({}, todo, { title: text });
+        return todo !== todoToSave ? todo : utils.extend({}, todo, { title: text });
     });
 
     this.inform();
@@ -76,4 +78,4 @@ TodoModel.prototype.clearCompleted = function () {
     this.inform();
 };
 
-module.exports = TodoModel;
+export default TodoModel;

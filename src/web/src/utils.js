@@ -1,5 +1,5 @@
-const Utils = {
-    uuid: function () {
+export default class Utils {
+    uuid() {
         /*jshint bitwise:false */
         var i, random;
         var uuid = '';
@@ -14,22 +14,22 @@ const Utils = {
         }
 
         return uuid;
-    },
+    }
 
-    pluralize: function (count, word) {
+    pluralize(count, word) {
         return count === 1 ? word : word + 's';
-    },
+    }
 
-    store: function (namespace, data) {
+    store(namespace, data) {
         if (data) {
             return localStorage.setItem(namespace, JSON.stringify(data));
         }
 
         var store = localStorage.getItem(namespace);
         return (store && JSON.parse(store)) || [];
-    },
+    }
 
-    extend: function () {
+    extend() {
         var newObj = {};
         for (var i = 0; i < arguments.length; i++) {
             var obj = arguments[i];
@@ -41,6 +41,4 @@ const Utils = {
         }
         return newObj;
     }
-};
-
-module.exports = Utils;
+}

@@ -10,15 +10,19 @@ module.exports = {
     },
     module: {
         rules: [
-          {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-              loader: "babel-loader"
+            {
+              test: /\.(js|jsx)$/,
+              exclude: /node_modules/,
+              use: {
+                loader: "babel-loader"
+              }
             }
-          }
-        ]
-      },
+          ]
+    },
+    plugins: [
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin()
+    ],
     devServer: {
         // proxy: { "/api": "http://localhost:3000" },  // proxy all API calls to node api app. must be running
         before(app) {   // serve a mock from webpack
@@ -32,7 +36,7 @@ module.exports = {
             app.post('/api', function (req, res) {
                 data = req.body;
 
-                res.json({success: true});
+                res.json({ success: true });
             })
         },
         hot: true

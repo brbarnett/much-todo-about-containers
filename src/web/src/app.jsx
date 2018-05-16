@@ -1,5 +1,9 @@
-import TodoFooter from './footer';
-import TodoItem from './todoItem';
+import React from 'react';
+import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import TodoFooter from './footer.jsx';
+import TodoItem from './todoItem.jsx';
 import TodoModel from './todoModel';
 
 const ALL_TODOS = 'all';
@@ -7,30 +11,33 @@ const ACTIVE_TODOS = 'active';
 const COMPLETED_TODOS = 'completed';
 const ENTER_KEY = 13;
 
-const TodoApp = React.createClass({
-    getInitialState: function () {
-        return {
-            nowShowing: app.ALL_TODOS,
+class TodoApp extends React.Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            nowShowing: ALL_TODOS,
             editing: null,
             newTodo: ''
         };
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         var setState = this.setState;
         var router = Router({
-            '/': setState.bind(this, { nowShowing: app.ALL_TODOS }),
-            '/active': setState.bind(this, { nowShowing: app.ACTIVE_TODOS }),
-            '/completed': setState.bind(this, { nowShowing: app.COMPLETED_TODOS })
+            '/': setState.bind(this, { nowShowing: ALL_TODOS }),
+            '/active': setState.bind(this, { nowShowing: ACTIVE_TODOS }),
+            '/completed': setState.bind(this, { nowShowing: COMPLETED_TODOS })
         });
         router.init('/');
-    },
+    }
 
-    handleChange: function (event) {
+    handleChange(event) {
         this.setState({ newTodo: event.target.value });
-    },
+    }
 
-    handleNewTodoKeyDown: function (event) {
+    handleNewTodoKeyDown(event) {
         if (event.keyCode !== ENTER_KEY) {
             return;
         }
@@ -43,48 +50,48 @@ const TodoApp = React.createClass({
             this.props.model.addTodo(val);
             this.setState({ newTodo: '' });
         }
-    },
+    }
 
-    toggleAll: function (event) {
+    toggleAll(event) {
         var checked = event.target.checked;
         this.props.model.toggleAll(checked);
-    },
+    }
 
-    toggle: function (todoToToggle) {
+    toggle(todoToToggle) {
         this.props.model.toggle(todoToToggle);
-    },
+    }
 
-    destroy: function (todo) {
+    destroy(todo) {
         this.props.model.destroy(todo);
-    },
+    }
 
-    edit: function (todo) {
+    edit(todo) {
         this.setState({ editing: todo.id });
-    },
+    }
 
-    save: function (todoToSave, text) {
+    save(todoToSave, text) {
         this.props.model.save(todoToSave, text);
         this.setState({ editing: null });
-    },
+    }
 
-    cancel: function () {
+    cancel() {
         this.setState({ editing: null });
-    },
+    }
 
-    clearCompleted: function () {
+    clearCompleted() {
         this.props.model.clearCompleted();
-    },
+    }
 
-    render: function () {
+    render() {
         var footer;
         var main;
         var todos = this.props.model.todos;
 
         var shownTodos = todos.filter(function (todo) {
             switch (this.state.nowShowing) {
-                case app.ACTIVE_TODOS:
+                case ACTIVE_TODOS:
                     return !todo.completed;
-                case app.COMPLETED_TODOS:
+                case COMPLETED_TODOS:
                     return todo.completed;
                 default:
                     return true;
@@ -160,16 +167,14 @@ const TodoApp = React.createClass({
             </div>
         );
     }
-});
+}
 
 var model = new TodoModel('react-todos');
 
-function render() {
-    React.render(
-        <TodoApp model={model} />,
-        document.getElementsByClassName('todoapp')[0]
-    );
-}
-
 model.subscribe(render);
-render();
+// render();
+
+render(
+    <TodoApp model={model} />,
+    document.getElementsByClassName('todoapp')[0]
+);

@@ -1,5 +1,8 @@
-const TodoFooter = React.createClass({
-    render: function () {
+import React from 'react';
+
+class TodoFooter extends React.Component {
+
+    render() {
         var activeTodoWord = app.Utils.pluralize(this.props.count, 'item');
         var clearButton = null;
 
@@ -48,6 +51,6 @@ const TodoFooter = React.createClass({
             </footer>
         );
     }
-});
+}
 
-module.exports = TodoFooter;
+export default TodoFooter;

@@ -4,13 +4,21 @@
     "build": "webpack",
     "dev": "webpack --watch",
     "release": "webpack --env.production",
-    "serve": "webpack-dev-server"
+    "serve": "webpack-dev-server --hotOnly --open"
   },
   "dependencies": {},
   "devDependencies": {
     "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-runtime": "^6.26.0",
     "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-router-dom": "^4.2.2",
     "webpack": "^4.6.0",
     "webpack-body-parser": "^1.11.110",
     "webpack-cli": "^2.0.15",

@@ -1,8 +1,11 @@
+import React from 'react';
+
 const ESCAPE_KEY = 27;
 const ENTER_KEY = 13;
 
-const TodoItem = React.createClass({
-    handleSubmit: function (event) {
+class TodoItem extends React.Component {
+
+    handleSubmit(event) {
         var val = this.state.editText.trim();
         if (val) {
             this.props.onSave(val);
@@ -10,31 +13,31 @@ const TodoItem = React.createClass({
         } else {
             this.props.onDestroy();
         }
-    },
+    }
 
-    handleEdit: function () {
+    handleEdit() {
         this.props.onEdit();
         this.setState({ editText: this.props.todo.title });
-    },
+    }
 
-    handleKeyDown: function (event) {
+    handleKeyDown(event) {
         if (event.which === ESCAPE_KEY) {
             this.setState({ editText: this.props.todo.title });
             this.props.onCancel(event);
         } else if (event.which === ENTER_KEY) {
             this.handleSubmit(event);
         }
-    },
+    }
 
-    handleChange: function (event) {
+    handleChange(event) {
         if (this.props.editing) {
             this.setState({ editText: event.target.value });
         }
-    },
+    }
 
-    getInitialState: function () {
+    getInitialState() {
         return { editText: this.props.todo.title };
-    },
+    }
 
     /**
      * This is a completely optional performance enhancement that you can
@@ -43,13 +46,13 @@ const TodoItem = React.createClass({
      * just use it as an example of how little code it takes to get an order
      * of magnitude performance improvement.
      */
-    shouldComponentUpdate: function (nextProps, nextState) {
+    shouldComponentUpdate(nextProps, nextState) {
         return (
             nextProps.todo !== this.props.todo ||
             nextProps.editing !== this.props.editing ||
             nextState.editText !== this.state.editText
         );
-    },
+    }
 
     /**
      * Safely manipulate the DOM after updating the state when invoking
@@ -57,15 +60,15 @@ const TodoItem = React.createClass({
      * For more info refer to notes at https://facebook.github.io/react/docs/component-api.html#setstate
      * and https://facebook.github.io/react/docs/component-specs.html#updating-componentdidupdate
      */
-    componentDidUpdate: function (prevProps) {
+    componentDidUpdate(prevProps) {
         if (!prevProps.editing && this.props.editing) {
             var node = React.findDOMNode(this.refs.editField);
             node.focus();
             node.setSelectionRange(node.value.length, node.value.length);
         }
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <li className={classNames({
                 completed: this.props.todo.completed,
@@ -94,6 +97,6 @@ const TodoItem = React.createClass({
             </li>
         );
     }
-});
+}
 
-module.exports = TodoItem;
+export default TodoItem;
