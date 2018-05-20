@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-api
+  name: {{ .Values.api.name }}
 spec:
   selector:
     matchLabels:
-      app: todo-api
-  replicas: 1
+      app: {{ .Values.api.name }}
+  replicas: {{ .Values.api.replicas }}
   template:
     metadata:
       labels:
-        app: todo-api
+        app: {{ .Values.api.name }}
     spec:
       containers:
-      - name: todo-api
-        image: brbarnett/todo-api:ci
+      - name: {{ .Values.api.name }}
+        image: {{ .Values.api.image }}
         env:
         - name: PORT
           value: "80"

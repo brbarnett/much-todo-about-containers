@@ -1,0 +1,30 @@
+api:
+  image: brbarnett/todo-api:ci
+  name: todo-api
+  replicas: 1
+
+web:
+  image: brbarnett/todo-web:ci
+  name: todo-web
+  replicas: 4
+
+ingress:
+  host: todo-aks-cluster.centralus.cloudapp.azure.com
+  name: todo-ingress
+  secret: todo-aks-cluster-com-tls
+
+issuer:
+  email: bbarnett@rightpoint.com
+
+nginx-ingress:
+  controller:
+    service:
+      loadBalancerIP: 104.43.217.79
+  rbac:
+    create: false
+
+cert-manager:
+  ingressShim:
+    extraArgs: '{--default-issuer-name=letsencrypt-prod,--default-issuer-kind=Issuer}'
+  rbac:
+    create: false
