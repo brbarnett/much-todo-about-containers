@@ -1,5 +1,11 @@
 apiVersion: v1
 appVersion: "1.0"
-description: A Helm chart for Kubernetes
+description: Helm chart describing a simple Todo app 
 name: todo-app
 version: 0.1.0
+icon: https://d30y9cdsu7xlg0.cloudfront.net/png/800143-200.png
+maintainers:
+  - name: Brandon R Barnett
+    email: bbarnett@rightpoint.com
+    url: https://twitter.com/brandonbarnett
+home: https://github.com/brbarnett/much-todo-about-containers

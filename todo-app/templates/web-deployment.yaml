@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-web
+spec:
+  selector:
+    matchLabels:
+      app: todo-web
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: todo-web
+    spec:
+      containers:
+      - name: todo-web
+        image: brbarnett/todo-web:ci
+        ports:
+        - containerPort: 80
