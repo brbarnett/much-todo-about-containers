@@ -1,0 +1,19 @@
+apiVersion: v1
+entries:
+  todo-app:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2018-05-20T15:16:56.787039274-05:00
+    description: Helm chart describing a simple Todo app
+    digest: ccebb3a7275496b65271bdb7caf03ddbd025467a28d8c93a0543c0f370471a45
+    home: https://github.com/brbarnett/much-todo-about-containers
+    icon: https://d30y9cdsu7xlg0.cloudfront.net/png/800143-200.png
+    maintainers:
+    - email: bbarnett@rightpoint.com
+      name: Brandon R Barnett
+      url: https://twitter.com/brandonbarnett
+    name: todo-app
+    urls:
+    - http://127.0.0.1:8879/todo-app-0.1.0.tgz
+    version: 0.1.0
+generated: 2018-05-20T15:16:56.785391812-05:00
