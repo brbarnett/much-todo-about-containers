@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.web.name }}
+  heritage: {{ .Release.Service }}
+  release: {{ .Release.Name }}
+  chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 spec:
   selector:
     matchLabels:
@@ -11,6 +14,9 @@ spec:
     metadata:
       labels:
         app: {{ .Values.web.name }}
+        heritage: {{ .Release.Service }}
+        release: {{ .Release.Name }}
+        chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     spec:
       containers:
       - name: {{ .Values.web.name }}
