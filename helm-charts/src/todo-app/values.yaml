@@ -27,7 +27,7 @@ nginx-ingress:
 
 cert-manager:
   # crd-install hook to ensure this runs prior to other resources. CRD thing
-  podAnnotations:
+  issuerAnnotations:
     "helm.sh/hook": "crd-install"
     "helm.sh/hook-delete-policy": "before-hook-creation"
   rbac:
