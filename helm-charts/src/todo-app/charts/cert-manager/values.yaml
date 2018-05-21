@@ -38,8 +38,8 @@ podAnnotations: {}
 
 # Optional annotations for Issuer CRD. Useful for Helm installation
 issuerAnnotations: {}
-  "helm.sh/hook": "crd-install"
-  "helm.sh/hook-delete-policy": "before-hook-creation"
+  # "helm.sh/hook": "crd-install"
+  # "helm.sh/hook-delete-policy": "before-hook-creation"
 
 # Optional annotations for ClusterIssuer CRD. Useful for Helm installation
 clusterIssuerAnnotations: {}
