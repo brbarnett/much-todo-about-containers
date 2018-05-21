@@ -4,7 +4,7 @@
     "build": "webpack",
     "dev": "webpack --watch",
     "release": "webpack --env.production",
-    "serve": "webpack-dev-server"
+    "serve": "webpack-serve --open"
   },
   "dependencies": {},
   "devDependencies": {
@@ -17,6 +17,8 @@
     "webpack": "^4.6.0",
     "webpack-body-parser": "^1.11.110",
     "webpack-cli": "^2.0.15",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-serve": "^1.0.2"
   }
 }

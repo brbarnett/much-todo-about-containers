@@ -35,5 +35,12 @@ module.exports = {
             })
         },
         hot: true
+    },
+    serve: {
+        hot: true,
+        logLevel: 'trace',
+        open: true,
+        port: 8080,
+        writeToDisk: false
     }
 };
