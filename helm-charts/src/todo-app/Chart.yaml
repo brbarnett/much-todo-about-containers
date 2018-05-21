@@ -9,4 +9,4 @@ maintainers:
     email: bbarnett@rightpoint.com
     url: https://twitter.com/brandonbarnett
 home: https://github.com/brbarnett/much-todo-about-containers
-tillerVersion: ">=2.9.1"
+tillerVersion: ">=2.9.0"
