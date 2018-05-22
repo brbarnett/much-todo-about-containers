@@ -15,24 +15,3 @@ ingress:
 
 issuer:
   email: bbarnett@rightpoint.com
-
-nginx-ingress:
-  controller:
-    service:
-      # Azure public, static IP address
-      loadBalancerIP: 104.43.217.79
-  rbac:
-    # Not supported in Azure
-    create: false
-
-cert-manager:
-  # crd-install hook to ensure this runs prior to other resources. CRD thing
-  issuerAnnotations:
-    "helm.sh/hook": "crd-install"
-    "helm.sh/hook-delete-policy": "before-hook-creation"
-  rbac:
-    # Not supported in Azure
-    create: false
-  extraArgs:
-    # Required to use Issuer instead of default ClusterIssuer
-    - '{--default-issuer-name=letsencrypt-prod,--default-issuer-kind=Issuer}'
