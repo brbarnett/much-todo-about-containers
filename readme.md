@@ -129,6 +129,14 @@ You will have to wait to hit your public IP directly until the load balancer fin
 
 ### Deploy using only Helm
 ```
+helm install stable/nginx-ingress \
+    --name nginx-ingress \
+    --namespace kube-system \
+    --set controller.service.loadBalancerIP=104.43.217.79 \
+    --set rbac.create=false \
+    --set rbac.createRole=false \
+    --set rbac.createClusterRole=false
+
 helm install stable/cert-manager \
     --name cert-manager \
     --namespace kube-system \
