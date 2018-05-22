@@ -6,10 +6,10 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/tls-acme: "true"
-labels:
-  heritage: {{ .Release.Service }}
-  release: {{ .Release.Name }}
-  chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 spec:
   tls:
     - hosts:

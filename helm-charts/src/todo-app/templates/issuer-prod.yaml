@@ -3,11 +3,10 @@ kind: Issuer
 metadata:
   name: letsencrypt-prod
   namespace: default
-  heritage: {{ .Release.Service }}
-  release: {{ .Release.Name }}
-  chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-  annotations:
-    "helm.sh/hook": "post-install"
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 spec:
   acme:
     server: https://acme-v01.api.letsencrypt.org/directory
