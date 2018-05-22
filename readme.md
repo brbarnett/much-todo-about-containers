@@ -96,8 +96,10 @@ helm repo update
 helm install stable/nginx-ingress \
     --name nginx-ingress \
     --namespace kube-system \
-    --set controller.service.loadBalancerIP=104.43.217.79 \    # this connects to the static IP you just provisioned and sets up a Load Balancer resource in Azure
-    --set rbac.create=false
+    --set controller.service.loadBalancerIP=104.43.217.79 \
+    --set rbac.create=false \
+    --set rbac.createRole=false \
+    --set rbac.createClusterRole=false
 
 kubectl get service -l app=nginx-ingress --namespace kube-system    # it will take a bit before the external IP shows up
 ```
@@ -133,7 +135,7 @@ helm install stable/cert-manager \
     --set ingressShim.extraArgs='{--default-issuer-name=letsencrypt-prod,--default-issuer-kind=Issuer}' \
     --set rbac.create=false     # AKS does not support RBAC at this time
 
-helm install ./helm-charts/src/todo-app
+helm install ./helm-charts/src/todo-app --name todo-release
 ```
 
 AKS clusters can be expensive -- don't forget to spin it down if you're not using it
