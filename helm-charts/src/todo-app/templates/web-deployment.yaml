@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.web.name }}
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.web.name }}
+  replicas: {{ .Values.web.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.web.name }}
+        heritage: {{ .Release.Service }}
+        release: {{ .Release.Name }}
+        chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    spec:
+      containers:
+      - name: {{ .Values.web.name }}
+        image: {{ .Values.web.image }}
+        ports:
+        - containerPort: 80

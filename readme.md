@@ -89,18 +89,22 @@ helm init --upgrade --service-account default   # required, otherwise you get a 
 helm repo update
 ```
 
-### Deploy the ingress controller
+### Deploy using kubectl + Helm
+
+#### Deploy the ingress controller
 ```
 helm install stable/nginx-ingress \
     --name nginx-ingress \
     --namespace kube-system \
-    --set controller.service.loadBalancerIP=104.43.217.79 \    # this connects to the static IP you just provisioned and sets up a Load Balancer resource in Azure
-    --set rbac.create=false
+    --set controller.service.loadBalancerIP=104.43.217.79 \
+    --set rbac.create=false \
+    --set rbac.createRole=false \
+    --set rbac.createClusterRole=false
 
 kubectl get service -l app=nginx-ingress --namespace kube-system    # it will take a bit before the external IP shows up
 ```
 
-### Install cert-manager for Let's Encrypt TLS support
+#### Install cert-manager for Let's Encrypt TLS support
 ```
 helm install stable/cert-manager \
     --name cert-manager \
@@ -111,7 +115,7 @@ helm install stable/cert-manager \
 kubectl apply -f src/ingress/tls/issuer-prod.yaml
 ```
 
-### Deploy the application
+#### Deploy the application
 ```
 kubectl apply -f src/ingress/ingress.yaml
 
@@ -122,6 +126,25 @@ kubectl apply -f src/web/deployment.yaml
 kubectl get services --all-namespaces   # view all running services
 ```
 You will have to wait to hit your public IP directly until the load balancer finishes provisioning. The cluster is available here: https://todo-aks-cluster.centralus.cloudapp.azure.com/
+
+### Deploy using only Helm
+```
+helm install stable/nginx-ingress \
+    --name nginx-ingress \
+    --namespace kube-system \
+    --set controller.service.loadBalancerIP=104.43.217.79 \
+    --set rbac.create=false \
+    --set rbac.createRole=false \
+    --set rbac.createClusterRole=false
+
+helm install stable/cert-manager \
+    --name cert-manager \
+    --namespace kube-system \
+    --set ingressShim.extraArgs='{--default-issuer-name=letsencrypt-prod,--default-issuer-kind=Issuer}' \
+    --set rbac.create=false     # AKS does not support RBAC at this time
+
+helm install ./helm-charts/src/todo-app --name todo-release
+```
 
 AKS clusters can be expensive -- don't forget to spin it down if you're not using it
 ```
