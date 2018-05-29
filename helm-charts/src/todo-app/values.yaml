@@ -6,7 +6,7 @@ api:
 web:
   image: brbarnett/todo-web:ci
   name: todo-web
-  replicas: 4
+  replicas: 6
 
 ingress:
   host: todo-aks-cluster.centralus.cloudapp.azure.com

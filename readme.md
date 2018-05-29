@@ -146,6 +146,15 @@ helm install stable/cert-manager \
 helm install ./helm-charts/src/todo-app --name todo-release
 ```
 
+### Upgrading and rolling back Helm releases
+```
+helm upgrade todo-release ./helm-charts/src/todo-app
+
+helm history todo-release
+
+helm rollback todo-release 1
+```
+
 AKS clusters can be expensive -- don't forget to spin it down if you're not using it
 ```
 az aks delete \
